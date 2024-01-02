@@ -216,8 +216,39 @@ contoh sintaks : Widget build(BuildContext context) { ISI KOMPONEN }
 
 
 
+Template Class Statis(Class Main / main.dart)
+________________________________________________________________________
+import 'package:first_project/splashscreen.dart';
+import 'package:flutter/material.dart';
+void main() {
+  runApp(MyApp());
+}
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: {
+        '/': (context) => NamaClassmu(),//Class yang pertama di eksekusi ketika aplikasi di jalankan
+      },
+    );
+  }
+}
+________________________________________________________________________⤣
 
-Template Class Dinamis(Class lain)
+Note : Ubah "NamaClassmu" sesuaikan dengan nama class yang ingin di eksekusi paling awal ketika aplikasi di jalankan
+
+
+
+
+
+
+
+
+
+
+Template Class Dinamis(Class page/tampilan)
 ________________________________________________________________________
 import 'dart:async';
 import 'package:flutter/material.dart';
