@@ -1,0 +1,233 @@
+LEARN FLUTTER (Fadil)
+
+Sintaks : 
+
+1.Lebar dan tinggi
+~ Untuk ukuran lebar yang menyesuaikan layar : width: double.infinity
+~ Untuk ukuran tinggi yang menyesuaikan layar : height: double.infinity (Tidak di sarankan)
+
+2.Warna
+ada 2 cara memakai sintaks warna yaitu
+~ color: Color.fromARGB(0, 0, 0, 0)
+~ color: Colors.black,
+
+3.Padding / lapisan dalam komponen
+~ Tanpa padding : padding: EdgeInsets.zero,
+~ Keseluruhan sisi dengan padding yang sama : padding: EdgeInsets.all(20),
+~ Keseluruhan sisi dengan padding yang beda : padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
+~ Hanya Kiri dan Kanan : padding: EdgeInsets.only(left: 16.0, right: 8.0),
+~ Hanya Atas dan Bawah : padding: EdgeInsets.only(top: 16.0, bottom: 8.0),
+~ Hanya Satu sisi : padding: EdgeInsets.only(top: 16),
+
+
+
+4.Margin / lapisan luar komponen
+~ Tanpa margin : margin: EdgeInsets.zero,
+~ Keseluruhan sisi dengan margin yang sama : margin: EdgeInsets.all(20),
+~ Keseluruhan sisi dengan margin yang beda : margin: EdgeInsets.fromLTRB(10, 20, 10, 20),
+~ Hanya Kiri dan Kanan : margin: EdgeInsets.only(left: 16.0, right: 8.0),
+~ Hanya Atas dan Bawah : margin: EdgeInsets.only(top: 16.0, bottom: 8.0),
+~ Hanya Satu sisi : margin: EdgeInsets.only(top: 16),
+
+
+
+5.menghilangkan tulisan debug
+~ debugShowCheckedModeBanner: false,
+
+
+6.TextField / input teks
+________________________________________________________________________
+ Padding(
+      padding: EdgeInsets.symmetric(horizontal: 40),
+       child: TextField(
+        textInputAction: TextInputAction.next,
+         decoration: InputDecoration(
+           prefixIcon: Icon(Icons.email),
+             labelText: "Inputan 1",
+               border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+             ),
+           ),
+         ),
+________________________________________________________________________⤣
+
+~ Padding
+Membungkus atau mengelilingi komponen seperti TextField untuk memberikan jarak atau ruang di sekitarnya. Dengan Padding, Anda dapat mengatur jarak antara komponen dengan elemen lain di layar dengan lebih mudah.
+
+~ Child
+Merujuk pada komponen yang berada di dalam atau dibungkus oleh Padding. Dalam konteks Padding, child adalah komponen utama yang ingin diberikan jarak di sekitarnya. Dengan menjadikan sebuah widget sebagai child dari Padding, Anda memberikan instruksi untuk memberikan jarak ke komponen tersebut.
+
+~ InputDecoration
+Digunakan untuk mengatur dekorasi visual dari TextField. Melalui InputDecoration, Anda dapat menyesuaikan penampilan visual seperti label, hint, border, ikon, dan atribut-atribut tampilan lainnya dari TextField. Ini memungkinkan penyesuaian tampilan TextField sesuai dengan desain aplikasi yang diinginkan.
+
+~ decoration:
+Properti decoration digunakan untuk menambahkan dekorasi seperti label, border, ikon, dan pesan hint pada TextField.
+
+~ prefixIcon dan suffixIcon:
+Properti ini menambahkan ikon sebelum atau setelah teks input di TextField.
+(prefixIcon SEBELUM, suffixIcon SETELAH)
+
+~ onChanged:
+Digunakan untuk menangani perubahan nilai pada TextField. Setiap kali nilai di TextField berubah, fungsi ini akan dipanggil.
+
+~ obscureText:
+Ketika diatur ke true, akan menyembunyikan teks yang dimasukkan, berguna untuk input password.
+
+~ validator:
+Properti ini digunakan saat TextField digunakan dalam bentuk Form. Berfungsi untuk melakukan validasi pada teks yang dimasukkan.
+
+~ controller:
+Digunakan untuk mengontrol atau mengatur nilai dari TextField. Dapat digunakan untuk mengatur, mendapatkan, atau menghapus teks yang dimasukkan.
+
+~ keyboardType:
+Menentukan jenis keyboard yang akan muncul saat TextField ditekan. Contohnya, TextInputType.emailAddress untuk memunculkan keyboard khusus alamat email.
+
+~ textInputAction:
+Mengatur tindakan yang harus dilakukan setelah selesai menginput pada TextField, seperti "Next", "Done", atau "Send".
+
+
+
+
+7.Button / Tombol
+~ TextButton
+TextButton adalah tombol sederhana dengan teks yang dapat disesuaikan dan transparan. Biasanya digunakan untuk tindakan sekunder di dalam aplikasi.
+________________________________________________________________________
+TextButton(
+  onPressed: () {
+    // Aksi yang dilakukan ketika tombol ditekan
+  },
+  child: Text('Tekan Tombol'),
+)
+________________________________________________________________________⤣
+
+~ ElevatedButton
+ElevatedButton adalah tombol yang menonjol dan memiliki background berwarna. Cocok untuk tindakan utama dalam aplikasi.
+________________________________________________________________________
+ElevatedButton(
+  onPressed: () {
+    // Aksi yang dilakukan ketika tombol ditekan
+  },
+  child: Text('Tekan Tombol'),
+)
+________________________________________________________________________⤣
+
+~ OutlinedButton
+OutlinedButton adalah tombol dengan garis pinggir dan tidak memiliki latar belakang. Cocok untuk tindakan sekunder dalam aplikasi.
+________________________________________________________________________
+OutlinedButton(
+  onPressed: () {
+    // Aksi yang dilakukan ketika tombol ditekan
+  },
+  child: Text('Tekan Tombol'),
+)
+________________________________________________________________________⤣
+
+
+
+
+8.Berpindah Page / Intent
+________________________________________________________________________
+  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => page_login()),
+                    );
+                  },
+________________________________________________________________________⤣
+
+PASTIKAN CLASS TUJUAN MEMILIKI routename atau nama jalur dengan contoh sintaks
+static const String routeName = "/PageLogin"; 
+DAN juga telah membuat State/statement pada class tujuan seperti contoh sintaks berikut
+________________________________________________________________________
+  @overrid
+  _PageLoginState createState() => _PageLoginState();
+}
+
+class _PageLoginState extends State<PageLogin> {
+}
+________________________________________________________________________⤣
+
+
+9.Penataan Layout
+
+~ Column 
+________________________________________________________________________
+body: Column(
+  mainAxisAlignment: MainAxisAlignment.center, // Penempatan vertical pada tengah layar
+  crossAxisAlignment: CrossAxisAlignment.center, // Penempatan horizontal di tengah layar
+  children: [ 
+
+],
+________________________________________________________________________⤣
+
+10. Visible widget
+Text
+appbar
+icon
+dll....
+
+
+11.Invisible widget(Layout widget/untuk ngeControl posisi widget lainnya)
+~Row()
+~Stack()
+~Column()
+~ListView()
+
+12.Widget Column(seperti "Linear" Layout jika pada android studio)
+~Untuk menyusun widget secara Vertical 
+
+
+13.Widget Row (Linear HORIZONTAL)
+~Untuk menyusun widget Horizontal
+
+14.Widget Stack (Tumpukan/Menyusun widget ke arah Depan)
+
+15.List Tile (Seperti Tampilan Chat){Salah Satu Widget Yang Digunakan Dalam ListView}
+~ title (Judul)
+~ subtitle (Deskripsi)
+~ leading (Profil/foto)
+~ trailing (Ending/Sebelah kanan)
+~ contentPadding (padding pada ListTile)
+~ Divider() (Pembatas ListTile)
+~ dense:true (Penyesuaian ukuran widget)
+~ onTap(){
+	 Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => page_login()),
+                    );}
+
+
+
+
+
+
+
+
+Struktur Tampilan Dasar
+~ StatelessWidget => jenis widget dasar untuk tampilan tanpa aksi atau hanya menampilkan output
+~ StatefullWidget => jenis widget dasar untuk tampilan dengan tujuan akan adanya perubahan pada komponen
+~ Build Widget => Build Widget Wajib ada agar dapat membuat widget pada class 
+contoh sintaks : Widget build(BuildContext context) { ISI KOMPONEN }
+~ Scafold => Widget keseluruhan untuk menampilkan widget lain seperti appbar,body,dll
+
+
+
+
+
+
+
+ARTI KATA/Kalimat :
+
+~ Primer:
+
+	Elemen primer adalah elemen-elemen yang memiliki peran atau kepentingan yang lebih tinggi 	dalam antarmuka pengguna. Mereka biasanya berkaitan dengan aksi atau konten yang merupakan 	fokus utama dari halaman atau tindakan yang diharapkan pengguna dilakukan.
+
+	Contohnya, dalam sebuah formulir pendaftaran, tombol "Simpan" atau "Kirim" bisa dianggap 	sebagai elemen primer karena mereka mewakili aksi utama yang diinginkan dari pengguna.
+
+
+~ Sekunder:
+
+	Elemen sekunder adalah elemen-elemen yang penting, tetapi memiliki tingkat kepentingan 	yang lebih rendah atau mungkin opsional dalam konteks antarmuka pengguna. Mereka mungkin 	tidak langsung berkaitan dengan tindakan utama yang diharapkan dari pengguna.
+
+	Contoh elemen sekunder bisa termasuk tombol atau link untuk menampilkan informasi bantuan, 	navigasi ke halaman lain yang terkait, atau aksi-aksi yang bersifat opsional dalam halaman 	aplikasi.
+
