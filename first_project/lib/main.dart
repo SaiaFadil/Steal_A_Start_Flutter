@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => NamaClassmu(),//Class yang pertama di eksekusi ketika aplikasi di jalankan
+        '/': (context) => SplashScreen(),//Class yang pertama di eksekusi ketika aplikasi di jalankan
       },
     );
   }
