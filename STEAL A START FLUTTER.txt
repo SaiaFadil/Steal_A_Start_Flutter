@@ -122,6 +122,15 @@ OutlinedButton(
 )
 ________________________________________________________________________⤣
 
+~ RaisedButton
+RaisedButton adalah tombol yang biasanya digunakan pada studi kasus yang berhubungan dengan increment dan decrement
+
+________________________________________________________________________
+RaisedButton(
+onPressed(){}
+child:Icon(Icons.add),
+)
+________________________________________________________________________⤣
 
 
 
@@ -195,30 +204,28 @@ dll....
                       MaterialPageRoute(
                           builder: (BuildContext context) => page_login()),
                     );}
+//untuk perpindahan tampilan ketika di item di tekan
 
-
-
-
-
-
-
-
-Struktur Tampilan Dasar
-~ StatelessWidget => jenis widget dasar untuk tampilan tanpa aksi atau hanya menampilkan output
-~ StatefullWidget => jenis widget dasar untuk tampilan dengan tujuan akan adanya perubahan pada komponen
-~ Build Widget => Build Widget Wajib ada agar dapat membuat widget pada class 
-contoh sintaks : Widget build(BuildContext context) { ISI KOMPONEN }
-~ Scafold => Widget keseluruhan untuk menampilkan widget lain seperti appbar,body,dll
-
-
-
-
-
-
-
-Template Class Statis(Class Main / main.dart)
+16.setState(refresh)
+setState berfungsi untuk merefresh tampilan pada widget Statefull dan biasanya di taruh dalam kode onPressed
 ________________________________________________________________________
-import 'package:first_project/splashscreen.dart';
+onPressed:(){
+setState({()
+nama_fungsi++;
+});
+}
+________________________________________________________________________⤣
+
+
+
+
+
+
+
+
+
+Template Class Utama (main.dart)
+________________________________________________________________________
 import 'package:flutter/material.dart';
 void main() {
   runApp(MyApp());
@@ -247,8 +254,35 @@ Note : Ubah "NamaClassmu" sesuaikan dengan nama class yang ingin di eksekusi pal
 
 
 
+Template Class Dinamis(Stateless Widget)
+________________________________________________________________________
+import 'package:flutter/material.dart';
 
-Template Class Dinamis(Class page/tampilan)
+class PageMain extends StatelessWidget {
+
+@override
+Widget build(BuildContext context){
+  return Scaffold(
+    appBar: AppBar(title: Text("Fadil F nya Flangter")),//opsional
+    body: Center(child: Column(
+      
+    )
+    ),
+  );
+}
+}
+________________________________________________________________________⤣
+Note : Ubah "PageMain" sesuai nama classmu
+
+
+
+
+
+
+
+
+
+Template Class Dinamis(Statefull Widget){Statefull harus mendeklarasikan createSate}
 ________________________________________________________________________
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -258,14 +292,6 @@ class PageMain extends StatefulWidget {
   _PageMainState createState()=> _PageMainState();
 }
 class _PageMainState extends State<PageMain>{
-@override
-void initState(){
-  super.initState();
-
-  Timer(Duration(milliseconds: 4500), () {
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SplashScreen(),));
-   });
-}
 @override
 Widget build(BuildContext context){
   return Scaffold(
@@ -288,6 +314,19 @@ ________________________________________________________________________⤣
 
 
 
+
+
+
+
+
+
+
+Struktur Tampilan Dasar
+~ StatelessWidget => jenis widget dasar untuk tampilan tanpa aksi atau hanya menampilkan output
+~ StatefullWidget => jenis widget dasar untuk tampilan dengan tujuan akan adanya perubahan pada komponen
+~ Build Widget => Build Widget Wajib ada agar dapat membuat widget pada class 
+contoh sintaks : Widget build(BuildContext context) { ISI KOMPONEN }
+~ Scafold => Widget keseluruhan untuk menampilkan widget lain seperti appbar,body,dll
 
 
 
