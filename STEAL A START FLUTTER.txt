@@ -35,7 +35,7 @@ ada 2 cara memakai sintaks warna yaitu
 ~ debugShowCheckedModeBanner: false,
 
 
-6.TextField / input teks
+6.TextField / input teks / edittext
 ________________________________________________________________________
  Padding(
       padding: EdgeInsets.symmetric(horizontal: 40),
@@ -215,6 +215,58 @@ nama_fungsi++;
 });
 }
 ________________________________________________________________________⤣
+
+
+
+17. Animasi Intent (Perpindahan Frame)
+Menggunakan Alpha / Tanpa efek transisi
+________________________________________________________________________
+     Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) => route,
+            transitionsBuilder: (_, animation, __, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+            transitionDuration: Duration(milliseconds: 500),
+          ),
+        );
+________________________________________________________________________⤣
+
+
+18. Card (Jika pada android studio namanya CardView)
+________________________________________________________________________
+Card(
+ child: Column(
+                    children: [
+                       Text(
+                          'ini nnti isinya',
+                          style: TextStyle(fontSize: 20),
+                      ),
+                    ],
+                  ),
+________________________________________________________________________⤣
+
+~ Menambahkan Radius Pada Card
+________________________________________________________________________
+ shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20)),
+                  ),
+________________________________________________________________________⤣
+
+~ Menambahkan Shadow/Bayangan Pada Card
+ elevation: 100
+
+
+
+
+
+
 
 
 
