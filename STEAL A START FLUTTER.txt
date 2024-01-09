@@ -132,6 +132,23 @@ child:Icon(Icons.add),
 )
 ________________________________________________________________________⤣
 
+~ GestureDetector 
+GestureDetector biasanya di pakai untuk membungkus gambar yang akan di jadikan button/tombol
+________________________________________________________________________
+GestureDetector(
+  onTap: () {
+    // Aksi yang ingin dijalankan saat tombol ditekan
+  },
+  child: Image.asset(
+    'assets/images/tombolmulai.png',
+    // atur ukuran gambar sesuai kebutuhan
+    width: 150,
+    height: 50,
+  ),
+)
+________________________________________________________________________⤣
+
+
 
 
 8.Berpindah Page / Intent
@@ -263,7 +280,16 @@ ________________________________________________________________________⤣
  elevation: 100
 
 
+19. Menampilkan Gambar/image
+________________________________________________________________________
 
+ child: Image.asset(
+    'assets/images/tombolmulai.png',
+    // atur ukuran gambar sesuai kebutuhan
+    width: 150,
+    height: 50,
+  ),
+________________________________________________________________________⤣
 
 
 
