@@ -1,5 +1,6 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:fresh_harvest/page/page_registrasi.dart';
 import 'package:fresh_harvest/src/CustomColors.dart';
 import 'package:fresh_harvest/src/CustomText.dart';
 import 'package:fresh_harvest/model/DataDiri.dart';
@@ -257,14 +258,14 @@ class _page_login extends State<page_login> {
                                         OutlinedBorder>(
                                       RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
-                                            Radius.circular(30)),
+                                            Radius.circular(10)),
                                       ),
                                     ),
                                     elevation:
-                                        MaterialStateProperty.all<double>(100),
+                                        MaterialStateProperty.all<double>(10),
                                     padding: MaterialStateProperty.all<
                                             EdgeInsetsGeometry>(
-                                        EdgeInsets.fromLTRB(70, 15, 70, 15)),
+                                        EdgeInsets.fromLTRB(70, 12, 70, 12)),
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(
                                             CustomColors.primaryColor),
@@ -276,24 +277,29 @@ class _page_login extends State<page_login> {
                                 ),
                               ),
                             ),
-
-                            Padding(padding:EdgeInsets.fromLTRB(30, 10, 30, 0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                 Text('Belum Punya Akun? ',
-                                      style: CustomText.TextArvo(
-                                          16, CustomColors.blackColor)),
-                                           TextButton(
-                                  onPressed: () {},
-                                  child: Text("Daftar",
-                                      style: CustomText.TextArvoItalic(
-                                          16, CustomColors.primaryColor)),
-                                ),
-                              ],
-                            ) ),
                             Padding(
-                              padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                                padding: EdgeInsets.fromLTRB(30, 10, 30, 0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text('Belum Punya Akun?',
+                                        style: CustomText.TextArvo(
+                                            16, CustomColors.blackColor)),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) => page_registrasi(),transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                          
+                                          return FadeTransition(opacity: animation,child: child,);
+                                        },));
+                                      },
+                                      child: Text("Daftar Disini",
+                                          style: CustomText.TextArvoBold(
+                                              16, CustomColors.redColor)),
+                                    ),
+                                  ],
+                                )),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -320,7 +326,7 @@ class _page_login extends State<page_login> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.fromLTRB(30, 10, 30, 20),
+                              padding: EdgeInsets.fromLTRB(30, 10, 30, 25),
                               child: ElevatedButton(
                                 onPressed: () {},
                                 style: ElevatedButton.styleFrom(
