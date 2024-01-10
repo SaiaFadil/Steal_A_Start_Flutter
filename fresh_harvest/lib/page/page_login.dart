@@ -1,10 +1,11 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:fresh_harvest/page/Page_lupa_katasandi.dart';
 import 'package:fresh_harvest/page/page_registrasi.dart';
+import 'package:fresh_harvest/src/CustomButton.dart';
 import 'package:fresh_harvest/src/CustomColors.dart';
 import 'package:fresh_harvest/src/CustomText.dart';
 import 'package:fresh_harvest/model/DataDiri.dart';
-import 'package:fresh_harvest/controller/controller_login.dart';
 
 class page_login extends StatefulWidget {
   @override
@@ -88,7 +89,7 @@ class _page_login extends State<page_login> {
                   ),
                 ),
                 Positioned(
-                  bottom: isEmailFocused || isPasswordFocused ? 0 : -5,
+                  bottom: isEmailFocused || isPasswordFocused ? 0 : 0,
                   left: -3,
                   right: -3,
                   child: Container(
@@ -110,9 +111,10 @@ class _page_login extends State<page_login> {
                               child: Text('Email',
                                   textAlign: TextAlign.left,
                                   style: CustomText.TextArvoBold(
-                                      16, CustomColors.blackColor)),
+                                      20, CustomColors.blackColor)),
                             ),
-                            Padding(
+                            Container(
+                              height: 55,
                               padding: EdgeInsets.fromLTRB(30, 5, 30, 10),
                               child: TextField(
                                 controller: emailController,
@@ -123,11 +125,11 @@ class _page_login extends State<page_login> {
                                   hintText: "Masukkan Email Anda",
                                   border: OutlineInputBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
+                                        BorderRadius.all(Radius.circular(10)),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
+                                        BorderRadius.all(Radius.circular(10)),
                                     borderSide: BorderSide(
                                       color: CustomColors
                                           .primaryColor, // Warna border saat aktif
@@ -135,10 +137,10 @@ class _page_login extends State<page_login> {
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
+                                        BorderRadius.all(Radius.circular(10)),
                                     borderSide: BorderSide(
                                       color: CustomColors
-                                          .HintColor, // Warna border saat tidak aktif
+                                          .blackColor, // Warna border saat tidak aktif
                                     ),
                                   ),
                                   contentPadding: EdgeInsets.symmetric(
@@ -165,9 +167,10 @@ class _page_login extends State<page_login> {
                               child: Text('Kata Sandi',
                                   textAlign: TextAlign.left,
                                   style: CustomText.TextArvoBold(
-                                      16, CustomColors.blackColor)),
+                                      20, CustomColors.blackColor)),
                             ),
-                            Padding(
+                            Container(
+                              height: 50,
                               padding: EdgeInsets.fromLTRB(30, 5, 30, 5),
                               child: TextField(
                                 controller: passwordController,
@@ -179,7 +182,7 @@ class _page_login extends State<page_login> {
                                   hintText: "Masukkan Kata Sandi Anda",
                                   border: OutlineInputBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
+                                        BorderRadius.all(Radius.circular(10)),
                                     borderSide: BorderSide(
                                       color: isPasswordFocused
                                           ? Colors.black
@@ -188,7 +191,7 @@ class _page_login extends State<page_login> {
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
+                                        BorderRadius.all(Radius.circular(10)),
                                     borderSide: BorderSide(
                                       color: CustomColors
                                           .primaryColor, // Warna border saat aktif
@@ -196,10 +199,10 @@ class _page_login extends State<page_login> {
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
+                                        BorderRadius.all(Radius.circular(10)),
                                     borderSide: BorderSide(
                                       color: CustomColors
-                                          .HintColor, // Warna border saat tidak aktif
+                                          .blackColor, // Warna border saat tidak aktif
                                     ),
                                   ),
                                   contentPadding: EdgeInsets.symmetric(
@@ -219,7 +222,7 @@ class _page_login extends State<page_login> {
                                           : Icons.visibility,
                                       color: Colors.grey,
                                     ),
-                                    iconSize: 30,
+                                    iconSize: 25,
                                   ),
                                 ),
                                 style: CustomText.TextArvo(
@@ -241,7 +244,11 @@ class _page_login extends State<page_login> {
                               child: Align(
                                 alignment: Alignment.centerRight,
                                 child: TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(context, PageRouteBuilder(pageBuilder: ((context, animation, secondaryAnimation) => page_lupa_katasandi()),transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                      return FadeTransition(opacity: animation,child: child);
+                                    },));
+                                  },
                                   child: Text("Lupa Kata Sandi",
                                       style: CustomText.TextArvoItalic(
                                           16, CustomColors.blackColor)),
@@ -249,27 +256,12 @@ class _page_login extends State<page_login> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(top: 20),
+                              padding: EdgeInsets.only(top: 5),
                               child: Align(
                                 alignment: Alignment.center,
                                 child: ElevatedButton(
-                                  style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                        OutlinedBorder>(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
-                                      ),
-                                    ),
-                                    elevation:
-                                        MaterialStateProperty.all<double>(10),
-                                    padding: MaterialStateProperty.all<
-                                            EdgeInsetsGeometry>(
-                                        EdgeInsets.fromLTRB(70, 12, 70, 12)),
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            CustomColors.primaryColor),
-                                  ),
+                                  style: CustomButton.DefaultButton(
+                                      CustomColors.primaryColor),
                                   onPressed: () {},
                                   child: Text("Masuk",
                                       style: CustomText.TextArvoBold(
@@ -287,10 +279,22 @@ class _page_login extends State<page_login> {
                                             16, CustomColors.blackColor)),
                                     TextButton(
                                       onPressed: () {
-                                        Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) => page_registrasi(),transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                          
-                                          return FadeTransition(opacity: animation,child: child,);
-                                        },));
+                                        Navigator.push(
+                                            context,
+                                            PageRouteBuilder(
+                                              pageBuilder: (context, animation,
+                                                      secondaryAnimation) =>
+                                                  page_registrasi(),
+                                              transitionsBuilder: (context,
+                                                  animation,
+                                                  secondaryAnimation,
+                                                  child) {
+                                                return FadeTransition(
+                                                  opacity: animation,
+                                                  child: child,
+                                                );
+                                              },
+                                            ));
                                       },
                                       child: Text("Daftar Disini",
                                           style: CustomText.TextArvoBold(

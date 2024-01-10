@@ -53,7 +53,12 @@ flutter:
     - assets/images/animmulai.png
     - assets/images/TextJudul.png
     - assets/images/bgregister.png
+    - assets/images/animberhasil.png
     - assets/images/tombolmulai.png
+    - assets/images/animlupasandi.png
+    - assets/images/animkodeotp.png
+    - assets/images/animaturulanglupa.png
+
     - assets/images/icons8-google-480.svg
 
   fonts:
