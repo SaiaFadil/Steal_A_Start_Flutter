@@ -13,6 +13,7 @@ class _menu_profileState extends State<menu_profile> {
   @override
   Widget build(BuildContext context) {
    return MaterialApp(
+    debugShowCheckedModeBanner: false,
       home: Scaffold(body: Center(
         child: Text("Profile",style: CustomText.TextChewyBold(40, CustomColors.blackColor,)),
       ),),

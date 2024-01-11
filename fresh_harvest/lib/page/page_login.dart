@@ -50,8 +50,7 @@ class _page_login extends State<page_login> {
         isPasswordFocused = false;
         FocusScope.of(context).unfocus();
 
-        return false; // Prevent back navigation
-        // Allow back navigation
+        return false;
       },
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -10,16 +10,24 @@ import 'package:fresh_harvest/src/CustomText.dart';
 class utama extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => BottomNavCubit(),
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
-          home: utamaPage(),
-        ));
+    return WillPopScope(
+      onWillPop: () async {
+        FocusScope.of(context).unfocus();
+
+        return false; 
+      },
+      child: BlocProvider(
+          create: (context) => BottomNavCubit(),
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+          
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
+            home: utamaPage(),
+          )),
+    );
   }
 }
 
@@ -58,7 +66,7 @@ class _utamaPageState extends State<utamaPage> {
       currentIndex: context.read<BottomNavCubit>().state,
       type: BottomNavigationBarType.fixed,
       selectedIconTheme:
-          IconThemeData(size: 20, color: CustomColors.primaryColor),
+          IconThemeData( color: CustomColors.primaryColor),
       fixedColor: CustomColors.primaryColor,
       unselectedItemColor: CustomColors.whiteColor,
       landscapeLayout: BottomNavigationBarLandscapeLayout.linear,

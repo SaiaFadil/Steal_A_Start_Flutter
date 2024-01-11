@@ -13,6 +13,7 @@ class _menu_shopState extends State<menu_shop> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(body: Center(
         child: Text("SHOP",style: CustomText.TextChewyBold(40, CustomColors.blackColor,)),
       ),),
