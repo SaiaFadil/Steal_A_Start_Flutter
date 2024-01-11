@@ -292,6 +292,10 @@ ________________________________________________________________________
 ________________________________________________________________________⤣
 
 
+20. Navbar (gw pake dari github)
+~ https://github.com/wisnuwiry/flutter-bottom-nav-cubit/tree/master
+ikutin aja arahannya sesuai kode yg ada di repositorynya
+
 
 
 

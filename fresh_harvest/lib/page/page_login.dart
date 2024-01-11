@@ -1,5 +1,6 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:fresh_harvest/navigation/utama.dart';
 import 'package:fresh_harvest/page/Page_lupa_katasandi.dart';
 import 'package:fresh_harvest/page/page_registrasi.dart';
 import 'package:fresh_harvest/src/CustomButton.dart';
@@ -245,9 +246,21 @@ class _page_login extends State<page_login> {
                                 alignment: Alignment.centerRight,
                                 child: TextButton(
                                   onPressed: () {
-                                    Navigator.push(context, PageRouteBuilder(pageBuilder: ((context, animation, secondaryAnimation) => page_lupa_katasandi()),transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                      return FadeTransition(opacity: animation,child: child);
-                                    },));
+                                    Navigator.push(
+                                        context,
+                                        PageRouteBuilder(
+                                          pageBuilder: ((context, animation,
+                                                  secondaryAnimation) =>
+                                              page_lupa_katasandi()),
+                                          transitionsBuilder: (context,
+                                              animation,
+                                              secondaryAnimation,
+                                              child) {
+                                            return FadeTransition(
+                                                opacity: animation,
+                                                child: child);
+                                          },
+                                        ));
                                   },
                                   child: Text("Lupa Kata Sandi",
                                       style: CustomText.TextArvoItalic(
@@ -262,7 +275,23 @@ class _page_login extends State<page_login> {
                                 child: ElevatedButton(
                                   style: CustomButton.DefaultButton(
                                       CustomColors.primaryColor),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        PageRouteBuilder(
+                                            pageBuilder: (context, animation,
+                                                    secondaryAnimation) =>
+                                                utama(),
+                                            transitionsBuilder: (context,
+                                                animation,
+                                                secondartAnimation,
+                                                child) {
+                                              return FadeTransition(
+                                                opacity: animation,
+                                                child: child,
+                                              );
+                                            }));
+                                  },
                                   child: Text("Masuk",
                                       style: CustomText.TextArvoBold(
                                           20, CustomColors.whiteColor)),
