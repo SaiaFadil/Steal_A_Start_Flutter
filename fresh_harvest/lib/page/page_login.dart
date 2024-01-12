@@ -23,7 +23,7 @@ class _page_login extends State<page_login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Future<List> _ceklogin() async {
+  Future _ceklogin() async {
     final response = await http.post(Uri.parse(Server.url("Login.php")), body: {
       "email": emailController.text,
       "password": passwordController.text
@@ -31,40 +31,42 @@ class _page_login extends State<page_login> {
 
     print(response.body);
     var datauser = json.decode(response.body);
+    print("=============================================");
+    List<String> profil = datauser['data'];
+    print(profil);
     if (datauser['kode'] == 2) {
       setState(() {
         isWrong = true;
       });
       print("username or password is wrong!!");
     } else if (datauser['kode'] == 1) {
-      Navigator.push(
-          context,
-          PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) => utama(),
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          ));
+      // Navigator.push(
+      //     context,
+      //     PageRouteBuilder(
+      //       pageBuilder: (context, animation, secondaryAnimation) => utama(),
+      //       transitionsBuilder:
+      //           (context, animation, secondaryAnimation, child) {
+      //         return FadeTransition(
+      //           opacity: animation,
+      //           child: child,
+      //         );
+      //       },
+      //     ));
       print("Login berhasil");
     }
     return [];
   }
+
   bool isObscured = true;
   bool isHovered = true;
   bool isEmailFocused = false;
   bool isPasswordFocused = false;
   bool isWrong = false;
 
-
   FocusNode emailFocusNode = FocusNode();
   FocusNode passwordFocusNode = FocusNode();
   @override
   void dispose() {
-    // Clean up the focus node when the Form is disposed.
     emailFocusNode.dispose();
     passwordFocusNode.dispose();
     super.dispose();
@@ -316,7 +318,9 @@ class _page_login extends State<page_login> {
                                   style: CustomButton.DefaultButton(
                                       CustomColors.primaryColor),
                                   onPressed: () {
-                                    _ceklogin();
+                                    setState(() {
+                                      _ceklogin();
+                                    });
                                     print("Login presseedd");
                                   },
                                   child: Text("Masuk",
