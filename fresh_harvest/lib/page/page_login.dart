@@ -1,3 +1,7 @@
+// import 'dart:html';
+
+import 'dart:convert';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:fresh_harvest/navigation/utama.dart';
@@ -6,7 +10,9 @@ import 'package:fresh_harvest/page/page_registrasi.dart';
 import 'package:fresh_harvest/src/CustomButton.dart';
 import 'package:fresh_harvest/src/CustomColors.dart';
 import 'package:fresh_harvest/src/CustomText.dart';
-import 'package:fresh_harvest/model/DataDiri.dart';
+import 'package:fresh_harvest/src/Server.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
 
 class page_login extends StatefulWidget {
   @override
@@ -17,20 +23,42 @@ class _page_login extends State<page_login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  DataDiri profil = DataDiri();
+  Future<List> _ceklogin() async {
+    final response = await http.post(Uri.parse(Server.url("Login.php")), body: {
+      "email": emailController.text,
+      "password": passwordController.text
+    });
+
+    print(response.body);
+    var datauser = json.decode(response.body);
+    if (datauser['kode'] == 2) {
+      setState(() {
+        isWrong = true;
+      });
+      print("username or password is wrong!!");
+    } else if (datauser['kode'] == 1) {
+      Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) => utama(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          ));
+      print("Login berhasil");
+    }
+    return [];
+  }
   bool isObscured = true;
   bool isHovered = true;
   bool isEmailFocused = false;
   bool isPasswordFocused = false;
+  bool isWrong = false;
 
-  @override
-  void initState() {
-    super.initState();
-    profil.name = 'Saia Fadi';
-    profil.email = 'fadillahwahyunugraha@gmail.com';
-    profil.password = 'admin123';
-    profil.address = 'Nganjuk, Jatim';
-  }
 
   FocusNode emailFocusNode = FocusNode();
   FocusNode passwordFocusNode = FocusNode();
@@ -106,8 +134,21 @@ class _page_login extends State<page_login> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
+                            Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(30, 85, 30, 10),
+                                child: Visibility(
+                                  visible: isWrong,
+                                  child: Text('Username atau password salah!',
+                                      textAlign: TextAlign.left,
+                                      style: CustomText.TextArvoBold(
+                                          16, CustomColors.redColor)),
+                                ),
+                              ),
+                            ),
                             Padding(
-                              padding: EdgeInsets.fromLTRB(30, 80, 30, 0),
+                              padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
                               child: Text('Email',
                                   textAlign: TextAlign.left,
                                   style: CustomText.TextArvoBold(
@@ -275,21 +316,8 @@ class _page_login extends State<page_login> {
                                   style: CustomButton.DefaultButton(
                                       CustomColors.primaryColor),
                                   onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        PageRouteBuilder(
-                                            pageBuilder: (context, animation,
-                                                    secondaryAnimation) =>
-                                                utama(),
-                                            transitionsBuilder: (context,
-                                                animation,
-                                                secondartAnimation,
-                                                child) {
-                                              return FadeTransition(
-                                                opacity: animation,
-                                                child: child,
-                                              );
-                                            }));
+                                    _ceklogin();
+                                    print("Login presseedd");
                                   },
                                   child: Text("Masuk",
                                       style: CustomText.TextArvoBold(

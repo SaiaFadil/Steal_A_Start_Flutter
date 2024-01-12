@@ -1,43 +1,23 @@
+
 class DataDiri {
-   String _name  = '';
-   String _email  = '';
-   String _password  = '';
-   String _address  = '';
-  
-    String get name {
-    return _name;
-  }
+  String name = '';
+  String email = '';
+  String password = '';
+  String alamat = '';
 
-  set name(String name) {
-    _name = name;
-  }
-  
-  
-    String get email {
-    return _email;
-  }
+  DataDiri({
+    required this.name,
+    required this.email,
+    required this.password,
+    required this.alamat,
+  });
 
-  set email(String email) {
-    _email = email;
+  factory DataDiri.fromJson(Map<String, dynamic> json) {
+    return DataDiri(
+      name: json['nama_lengkap'] ?? '',
+      email: json['email'] ?? '',
+      password: json['password'] ?? '',
+      alamat: json['alamat'] ?? '',
+    );
   }
-  
-  
-    String get password {
-    return _password;
-  }
-
-  set password(String password) {
-    _password = password;
-  }
-  
-  
-    String get address {
-    return _address;
-  }
-
-  set address(String address) {
-    _address = address;
-  }
-  
-  
 }

@@ -18,3 +18,4 @@ class Fresh_Harvest extends StatelessWidget {
     );
   }
 }
+//mapping_list atau bisa disebut juga penempatan component
