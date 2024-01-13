@@ -1,6 +1,6 @@
 class Server {
   static String url(url){
-    String Server = "https://elok.tifnganjuk.com/DatabaseMobile/"+url;
+    String Server = "http://192.168.1.10/fh_db/"+url;
     return Server;
   }
 }

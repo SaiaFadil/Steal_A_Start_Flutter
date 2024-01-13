@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:fresh_harvest/model/DataUser.dart';
 import 'package:fresh_harvest/navigation/utama.dart';
 import 'package:fresh_harvest/page/Page_lupa_katasandi.dart';
 import 'package:fresh_harvest/page/page_registrasi.dart';
@@ -22,41 +23,46 @@ class page_login extends StatefulWidget {
 class _page_login extends State<page_login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
-  Future _ceklogin() async {
-    final response = await http.post(Uri.parse(Server.url("Login.php")), body: {
-      "email": emailController.text,
-      "password": passwordController.text
-    });
-
-    print(response.body);
-    var datauser = json.decode(response.body);
-    print("=============================================");
-    List<String> profil = datauser['data'];
-    print(profil);
-    if (datauser['kode'] == 2) {
-      setState(() {
-        isWrong = true;
-      });
-      print("username or password is wrong!!");
-    } else if (datauser['kode'] == 1) {
-      // Navigator.push(
-      //     context,
-      //     PageRouteBuilder(
-      //       pageBuilder: (context, animation, secondaryAnimation) => utama(),
-      //       transitionsBuilder:
-      //           (context, animation, secondaryAnimation, child) {
-      //         return FadeTransition(
-      //           opacity: animation,
-      //           child: child,
-      //         );
-      //       },
-      //     ));
-      print("Login berhasil");
+  Future<DataUser?> _ceklogin() async {
+    try {
+      final response = await http.post(Uri.parse(Server.url("Login.php")),
+          body: {
+            "email": emailController.text,
+            "password": passwordController.text
+          });
+      if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+        setState(() {
+          errorText = 'Email dan password harus terisi !';
+          isWrong = true;
+        });
+      } else {
+        if (response.statusCode == 200) {
+          String jsonData = response.body.toString();
+          Map<String, dynamic> userJson = jsonDecode(jsonData);
+          if (userJson.isNotEmpty) {
+            isWrong = false;
+            return DataUser.fromJson(userJson);
+          } else {
+            setState(() {
+              errorText = 'Email atau password salah!';
+              isWrong = true;
+            });
+            print(DataUser.fromJson(userJson));
+            print("User data is empty");
+            return null;
+          }
+        } else {
+          print("Error: ${response.statusCode}");
+          return null;
+        }
+      }
+    } catch (error) {
+      print("Error: $error");
+      return null;
     }
-    return [];
   }
 
+  String errorText = "";
   bool isObscured = true;
   bool isHovered = true;
   bool isEmailFocused = false;
@@ -76,6 +82,7 @@ class _page_login extends State<page_login> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
+        isWrong = false;
         isEmailFocused = false;
         isPasswordFocused = false;
         FocusScope.of(context).unfocus();
@@ -89,6 +96,7 @@ class _page_login extends State<page_login> {
           body: GestureDetector(
             onTap: () {
               setState(() {
+                isWrong = false;
                 isEmailFocused = false;
                 isPasswordFocused = false;
                 FocusScope.of(context).unfocus();
@@ -142,7 +150,7 @@ class _page_login extends State<page_login> {
                                 padding: EdgeInsets.fromLTRB(30, 85, 30, 10),
                                 child: Visibility(
                                   visible: isWrong,
-                                  child: Text('Username atau password salah!',
+                                  child: Text(errorText,
                                       textAlign: TextAlign.left,
                                       style: CustomText.TextArvoBold(
                                           16, CustomColors.redColor)),
@@ -197,6 +205,7 @@ class _page_login extends State<page_login> {
                                 ),
                                 focusNode: emailFocusNode,
                                 onTap: () {
+                                  isWrong = false;
                                   setState(() {
                                     emailFocusNode.requestFocus();
                                     isEmailFocused = true;
@@ -274,6 +283,7 @@ class _page_login extends State<page_login> {
                                 ),
                                 focusNode: passwordFocusNode,
                                 onTap: () {
+                                  isWrong = false;
                                   setState(() {
                                     passwordFocusNode.requestFocus();
                                     isPasswordFocused = true;
