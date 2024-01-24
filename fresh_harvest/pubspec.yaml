@@ -15,6 +15,7 @@ dependencies:
   fluttericon: ^2.0.0
   flutter_bloc: ^8.1.3
   cupertino_icons: ^1.0.2
+  flutter_sticky_header: ^0.6.0
   http: ^1.1.0
 
 dev_dependencies:
@@ -51,6 +52,17 @@ flutter:
     - assets/images/ic_dikemas.png
     - assets/images/ic_diambil.png
     - assets/images/ic_proses.png
+    - assets/images/ic_message.png
+    - assets/images/Alpukat.png
+    - assets/images/Jeruk.png
+    - assets/images/Pisang.png
+    - assets/images/Wortel.png
+    - assets/images/Bayam.png
+    - assets/images/Cabai.png
+    - assets/images/default.png
+    - assets/images/fotosaya.jpg
+    - assets/images/ApelFuji.png
+    - assets/images/maps.png
     - assets/images/icons8-google-480.svg
 
   fonts:

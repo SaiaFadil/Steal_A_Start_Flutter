@@ -1,10 +1,7 @@
-// import 'dart:html';
-
 import 'dart:convert';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
-import 'package:fresh_harvest/model/DataUser.dart';
 import 'package:fresh_harvest/navigation/utama.dart';
 import 'package:fresh_harvest/page/Page_lupa_katasandi.dart';
 import 'package:fresh_harvest/page/page_registrasi.dart';
@@ -16,6 +13,7 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 
 class page_login extends StatefulWidget {
+  static String id_user = "";
   @override
   State<page_login> createState() => _page_login();
 }
@@ -23,42 +21,52 @@ class page_login extends StatefulWidget {
 class _page_login extends State<page_login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  Future<DataUser?> _ceklogin() async {
-    try {
-      final response = await http.post(Uri.parse(Server.url("Login.php")),
-          body: {
-            "email": emailController.text,
-            "password": passwordController.text
-          });
-      if (emailController.text.isEmpty || passwordController.text.isEmpty) {
-        setState(() {
-          errorText = 'Email dan password harus terisi !';
-          isWrong = true;
-        });
-      } else {
-        if (response.statusCode == 200) {
-          String jsonData = response.body.toString();
-          Map<String, dynamic> userJson = jsonDecode(jsonData);
-          if (userJson.isNotEmpty) {
-            isWrong = false;
-            return DataUser.fromJson(userJson);
-          } else {
-            setState(() {
-              errorText = 'Email atau password salah!';
-              isWrong = true;
-            });
-            print(DataUser.fromJson(userJson));
-            print("User data is empty");
-            return null;
-          }
+  Future _ceklogin() async {
+    final response = await http.post(Server.url("Login.php"), body: {
+      "email": emailController.text,
+      "password": passwordController.text
+    });
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+      setState(() {
+        errorText = 'Email dan password harus terisi !';
+        isWrong = true;
+      });
+    } else {
+      if (response.statusCode == 200) {
+       
+        String jsonData = response.body.toString();
+        print(jsonData);
+        if (jsonData != "[]") {
+           Map<String, dynamic> detailUser = json.decode(response.body);
+        print(detailUser);
+          isWrong = false;
+          Navigator.push(
+              context,
+              PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      utama(),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    return FadeTransition(opacity: animation, child: child);
+                  }));
+          page_login.id_user = detailUser['id_user'];
+          print(detailUser['id_user']);
         } else {
-          print("Error: ${response.statusCode}");
+          setState(() {
+            errorText = 'Email atau password salah!';
+            isWrong = true;
+          });
+          print("User data is empty");
           return null;
         }
+      } else {
+         setState(() {
+            errorText = 'Periksa Koneksi Anda!';
+            isWrong = true;
+          });
+        print("Error: ${response.statusCode}");
+        return null;
       }
-    } catch (error) {
-      print("Error: $error");
-      return null;
     }
   }
 
