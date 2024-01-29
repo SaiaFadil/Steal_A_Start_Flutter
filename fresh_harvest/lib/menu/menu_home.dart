@@ -179,12 +179,13 @@ class _MenuHomeState extends State<menu_home> {
                           Padding(
                               padding: const EdgeInsets.only(top: 10),
                               child: Container(
-                                height: 75,
-                                child: Image.asset(
-                                  
-  Server.urlGambar(listSayur[index]['image'] != null ? listSayur[index]['image'] : "default.png"),
-                                )
-                              )),
+                                  height: 75,
+                                  child: Image.asset(
+                                    Server.urlGambar(
+                                        listSayur[index]['image'] != null
+                                            ? listSayur[index]['image']
+                                            : "default.png"),
+                                  ))),
                           Padding(
                             padding: EdgeInsets.only(top: 10),
                             child: Text(

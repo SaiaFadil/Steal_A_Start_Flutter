@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_harvest/src/CustomColors.dart';
 import 'package:fresh_harvest/src/CustomText.dart';
-
 import 'package:flutter_svg/flutter_svg.dart';
 
 class PageDetailProfil extends StatefulWidget {
@@ -11,6 +10,7 @@ class PageDetailProfil extends StatefulWidget {
 
 class _PageDetailProfilState extends State<PageDetailProfil> {
   @override
+  
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
